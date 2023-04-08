@@ -24,6 +24,9 @@
 			color: #333;
 			margin-top: 10px;
 			}
+            #text-list {
+                display: none;
+            }
 		</style>
 	</head>
 	<body class="is-preload">
@@ -41,8 +44,8 @@
 						<ul class="links">
 							<li><a href="index.html">Who Am I?</a></li>
 							<li><a href="generic.html">Blog</a></li>
-							<li class="active"><a href="map.html">Map</a></li><li>
-							<a href="form.html">Claim</a></li>
+                            <li><a href="map.html">Map</a></li>
+							<li class="active"><a href="form.html">Claim</a></li>
 							<li><a href="elements.html">Contact</a></li>
 						</ul>
 						<ul class="icons">
@@ -51,11 +54,54 @@
 						</ul>
 					</nav>
 
+                    
+
+                    <ul id="text-list">
+                        <li>HW13HKD2</li>
+                        <li>Text 2</li>
+                        <li>Text 3</li>
+                    </ul>
+                    
 				<!-- Main -->
 				<div id="main">
-					<section>
-					<div id="map"></div>
-					</section>
+                    <video id="video">Video stream not available.</video>
+                    
+                    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+
+                    <script>
+                        let scanner = new Instascan.Scanner({ video: document.getElementById('video') });
+                        scanner.addListener('scan', function (content) {
+                            let textList = document.querySelectorAll('#text-list li');
+                            let found = false;
+                            for (let i = 0; i < textList.length; i++) {
+                                if (textList[i].textContent.trim() === content.trim()) {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if (found) {
+                                // Here you can implement the logic for claiming the object.
+                                // You can send a request to your backend to store the information
+                                // about the claimed object and the user who claimed it.
+                                alert('Object claimed by ' + content);
+                            } else {
+                                alert('Invalid QR code.');
+                            }
+                        });
+                        Instascan.Camera.getCameras().then(function (cameras) {
+                            if (cameras.length > 0) {
+                                scanner.start(cameras[0]);
+                            } else {
+                                console.error('No cameras found.');
+                            }
+                        }).catch(function (e) {
+                            console.error(e);
+                        });
+                    </script>
+                    
+                </body>
+                
+                
 				</div>
 
 				<!-- Copyright -->

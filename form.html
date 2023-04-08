@@ -54,14 +54,6 @@
 						</ul>
 					</nav>
 
-                    
-
-                    <ul id="text-list">
-                        <li>HW13HKD2</li>
-                        <li>Text 2</li>
-                        <li>Text 3</li>
-                    </ul>
-                    
 				<!-- Main -->
 				<div id="main">
                     <div id="reader"></div>
@@ -69,7 +61,7 @@
                     <script src="https://cdn.jsdelivr.net/npm/html5-qrcode/minified/html5-qrcode.min.js"></script>
                     <script>
                     let html5QrcodeScanner = new Html5QrcodeScanner(
-                        "reader", { fps: 10, qrbox: 250 });
+                        "reader", { fps: 10, qrbox: 400 });
 
                     function onScanSuccess(qrCodeMessage) {
                         // Here you can implement the logic for claiming the object.
@@ -77,17 +69,23 @@
                         // about the claimed object and the user who claimed it.
                         a = qrCodeMessage;
                         if (a=="HW13HKD2"){
-                            alert('Object claimed by Admin.');
+							var name = prompt("What is your username?");
+                            alert('Drop 2 claimed by ' + name + '.');
+
                         }
+						else if (a=="HJ43FDD5") {
+							var name = prompt("What is your username?");
+                            alert('Drop 1 claimed by ' + name + '.');
+						}
                         else{
-                            alert('Object not found.');
+                            alert('QR Code Scanned is not valid.');
                         }
                     }
 
                     html5QrcodeScanner.render(onScanSuccess);
 
                 </script>
-                    
+
                 </body>
                 
                 

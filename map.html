@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Arnit Sinha - Map</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+		<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+		<style>
+			#map {
+				height: 100vh;
+  				width: 100%;
+			}
+			.popup-content img {
+			width: 100%;
+			height: auto;
+			}
+			.leaflet-popup-content {
+			width: 100vw;
+			height: 100%; 
+			font-size: 14px;
+			color: #333;
+			margin-top: 10px;
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">Arnit Sinha</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Who Am I?</a></li>
+							<li><a href="generic.html">Blog</a></li>
+							<li class="active"><a href="map.html">Map</a></li>
+							<li><a href="elements.html">Contact</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/arnitsinha/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="https://github.com/arnitsinha" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+				<div id="main">
+
+					<div id="map"></div>
+
+			</div>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Arnit Sinha</li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script>
+				var map = L.map('map').setView([44.6630,-74.9996], 17);
+				L.tileLayer('https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=JWyrFVd3tdyQ36A0UTAh', {maxZoom: 30,attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+				var marker = L.marker([44.66453,-74.99866]);
+				marker.bindPopup("<p><b>Drop 1</b></p><div class='popup-content'><a href='images/drop1.png' target='_blank'><img src='images/drop1.png' alt='Image description' ></a><p> Hand Shaker Thingey?</p></div>");
+				marker.addTo(map);
+			</script>
+
+	</body>
+</html>

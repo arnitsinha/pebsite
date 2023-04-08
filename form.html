@@ -64,44 +64,20 @@
                     
 				<!-- Main -->
 				<div id="main">
-                    <video id="video">Video stream not available.</video>
-                    
-                    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+                    <div id="reader"></div>
 
+                    <script src="https://cdn.jsdelivr.net/npm/html5-qrcode/minified/html5-qrcode.min.js"></script>
                     <script>
-                        let scanner = new Instascan.Scanner({ video: document.getElementById('video') });
-                        scanner.addListener('scan', function (content) {
-                            let textList = document.querySelectorAll('#text-list li');
-                            let found = false;
-                            for (let i = 0; i < textList.length; i++) {
-                                if (textList[i].textContent.trim() === content.trim()) {
-                                    found = true;
-                                    break;
-                                }
-                            }
-                            if (found) {
-                                // Here you can implement the logic for claiming the object.
-                                // You can send a request to your backend to store the information
-                                // about the claimed object and the user who claimed it.
-                                alert('Object claimed by ' + content);
-                            } else {
-                                alert('Invalid QR code.');
-                            }
-                        });
-                        Instascan.Camera.getCameras().then(function (cameras) {
-                        if (cameras.length > 0) {
-                            // Use back camera on mobile devices
-                            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-                                scanner.start(cameras[1] || cameras[0]);
-                            } else {
-                                scanner.start(cameras[0]);
-                            }
-                        } else {
-                            console.error('No cameras found.');
-                        }
-                    }).catch(function (e) {
-                        console.error(e);
-                    });
+                    let html5QrcodeScanner = new Html5QrcodeScanner(
+                        "reader", { fps: 10, qrbox: 250 });
+                    html5QrcodeScanner.render(onScanSuccess);
+
+                    function onScanSuccess(qrCodeMessage) {
+                        // Here you can implement the logic for claiming the object.
+                        // You can send a request to your backend to store the information
+                        // about the claimed object and the user who claimed it.
+                        alert('Object claimed by ' + qrCodeMessage);
+                    }
                 </script>
                     
                 </body>

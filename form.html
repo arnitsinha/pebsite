@@ -57,34 +57,33 @@
 				<!-- Main -->
 				<div id="main">
                     <div id="reader"></div>
-                    <video id="reader" width="100%"></video>
-                    <script src="https://cdn.jsdelivr.net/npm/html5-qrcode/minified/html5-qrcode.min.js"></script>
-                    <script>
-                    let html5QrcodeScanner = new Html5QrcodeScanner(
-                        "reader", { fps: 10, qrbox: 400 });
 
-                    function onScanSuccess(qrCodeMessage) {
-                        // Here you can implement the logic for claiming the object.
-                        // You can send a request to your backend to store the information
-                        // about the claimed object and the user who claimed it.
-                        a = qrCodeMessage;
-                        if (a=="HW13HKD2"){
-							var name = prompt("What is your username?");
-                            alert('Drop 2 claimed by ' + name + '.');
+<script src="https://cdn.jsdelivr.net/npm/html5-qrcode/minified/html5-qrcode.min.js"></script>
 
-                        }
-						else if (a=="HJ43FDD5") {
-							var name = prompt("What is your username?");
-                            alert('Drop 1 claimed by ' + name + '.');
-						}
-                        else{
-                            alert('QR Code Scanned is not valid.');
-                        }
-                    }
+<script>
+  // List of expected QR code values
+  const expectedValues = ['value1', 'value2', 'value3'];
 
-                    html5QrcodeScanner.render(onScanSuccess);
+  // Initialize the QR code scanner
+  const scanner = new Html5QrcodeScanner(
+    'reader',
+    { fps: 10, qrbox: 250 },
+    /* verbose= */ false
+  );
 
-                </script>
+  // Define the on success callback function
+  function onScanSuccess(qrCodeMessage) {
+    if (expectedValues.includes(qrCodeMessage)) {
+      alert('QR code value matches the expected list!');
+    } else {
+      alert('QR code value does not match the expected list!');
+    }
+  }
+
+  // Render the scanner and start scanning
+  scanner.render(onScanSuccess);
+</script>
+
 
                 </body>
                 
